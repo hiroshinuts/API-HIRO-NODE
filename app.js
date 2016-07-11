@@ -43,11 +43,22 @@ router.route('/times')
 			}else{
 				res.json({message: 'Time cadastrado com sucesso!'})
 			}
-		});
+		})
 	});
+
+router.route('/times/:id')
+	.get(function(req,res){
+		Times.findById(req.params.id, function(err, dados){
+			if(err){
+				res.send(err);
+			}
+			res.json(dados);
+		});
+	})
 
 app.use('/api', router);
 app.use('/times', router);
+app.use('/times/:id', router);
 
 app.listen(port, function(){
 	console.log('Servidor rodando na porta: '+ port)
