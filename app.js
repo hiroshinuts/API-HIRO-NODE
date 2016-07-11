@@ -3,6 +3,15 @@ var express 	= require('express'),
 	bodyParser 	= require('body-parser'),
 	app 		= express();
 
+//Conexao com o mongoDB
+mongoose.connect('mongodb://localhost/api', function(err){
+	if(err){
+		console.log('Erro ao conectar no mongodb: ' + err);
+	}else{
+		console.log('Conexao com mongodb realizada com sucesso');
+	}
+});
+
 
 app.use(bodyParser());
 
