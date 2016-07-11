@@ -55,6 +55,22 @@ router.route('/times/:id')
 			res.json(dados);
 		});
 	})
+	.put(function(req,res){
+		Times.findById(req.params.id, function(err, dados){
+			if(err){
+				res.send(err);
+			}
+			dados.nome = req.body.nome;
+			dados.save(function(err){
+				if(err){
+					res.send(err);
+				}
+				res.json({message: 'Time atualizado com sucesso!'});
+			})
+		});
+	})
+
+
 
 app.use('/api', router);
 app.use('/times', router);
