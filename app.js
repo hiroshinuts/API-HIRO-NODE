@@ -19,13 +19,13 @@ app.use(bodyParser());
 var port = process.env.PORT || 3000;
 
 //Rotas
-var route = express.Router();
+var router = express.Router();
 
-route.get('/', function(req, res){
+router.get('/', function(req, res){
 	res.json({message: 'Hiro API'});
 });
 
-route.router('/times')
+router.route('/times')
 	.post(function(req,res){
 		var times = new Times();
 		times.nome = req.body.nome;
@@ -38,7 +38,8 @@ route.router('/times')
 		});
 	});
 
-app.use('/api', route);
+app.use('/api', router);
+app.use('/times', router);
 
 app.listen(port, function(){
 	console.log('Servidor rodando na porta: '+ port)
