@@ -68,6 +68,7 @@ router.route('/times/:id')
 				}else{
 				res.json({message: 'Time atualizado com sucesso!'});
 				}
+			
 			})
 		});
 	})
