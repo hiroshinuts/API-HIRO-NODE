@@ -51,8 +51,9 @@ router.route('/times/:id')
 		Times.findById(req.params.id, function(err, dados){
 			if(err){
 				res.send(err);
-			}
+			}else{
 			res.json(dados);
+			}
 		});
 	})
 	.put(function(req,res){
@@ -64,10 +65,20 @@ router.route('/times/:id')
 			dados.save(function(err){
 				if(err){
 					res.send(err);
-				}
+				}else{
 				res.json({message: 'Time atualizado com sucesso!'});
+				}
 			})
 		});
+	})
+	.delete(function(req,res){
+		Times.remove({_id: req.params.id}, function(err, dados){
+			if(err){
+				res.send(err)
+			}else{
+			res.json({message: 'Time excluido com sucesso!'})
+			}
+		})
 	})
 
 
