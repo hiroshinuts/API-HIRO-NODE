@@ -26,6 +26,14 @@ router.get('/', function(req, res){
 });
 
 router.route('/times')
+	.get(function(req,res){
+		Times.find(function(err, dados){
+			if(err){
+			res.send(err);
+			}
+			res.json(dados);
+		})
+	})
 	.post(function(req,res){
 		var times = new Times();
 		times.nome = req.body.nome;
