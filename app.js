@@ -1,7 +1,8 @@
 var express 	= require('express'),
 	mongoose 	= require('mongoose'),
 	bodyParser 	= require('body-parser'),
-	app 		= express();
+	app 		= express(),
+	Times 		= require('./models/times');
 
 //Conexao com o mongoDB
 mongoose.connect('mongodb://localhost/api', function(err){
@@ -23,6 +24,19 @@ var route = express.Router();
 route.get('/', function(req, res){
 	res.json({message: 'Hiro API'});
 });
+
+route.router('/times')
+	.post(function(req,res){
+		var times = new Times();
+		times.nome = req.body.nome;
+		times.save(function(err){
+			if(err){
+				res.send(err);
+			}else{
+				res.json({message: 'Time cadastrado com sucesso!'})
+			}
+		});
+	});
 
 app.use('/api', route);
 
