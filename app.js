@@ -16,3 +16,7 @@ route.get('/', function(req, res){
 });
 
 app.use('/api', route);
+
+app.listen(port, function(){
+	console.log('Servidor rodando na porta: '+ port)
+});
